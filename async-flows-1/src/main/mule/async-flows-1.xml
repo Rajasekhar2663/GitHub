@@ -18,5 +18,6 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 		</async>
 		<logger level="INFO" doc:name="Logger" doc:id="c66f9684-0a19-4877-aeef-3b8086b5fa03" message="4"/>
 		<logger level="INFO" doc:name="Logger" doc:id="144e8f51-fd3a-4d01-b33d-312dc43c5204" message="5"/>
+		<logger level="INFO" doc:name="Logger" doc:id="144e8f51-fd3a-4d01-b33d-312dc43c5204" message="5"/>
 	</flow>
 </mule>
