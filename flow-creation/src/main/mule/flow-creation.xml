@@ -13,6 +13,7 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 		<flow-ref doc:name="Flow Reference" doc:id="36ed3844-506c-4eac-a45f-31fbb8288f29" name="flow-creationSub_Flow"/>
 		<logger level="INFO" doc:name="Logger" doc:id="6c65458d-3949-4a22-8014-c7bfa91cb5ad" message="Hi nice to create here" />
 		<logger level="INFO" doc:name="Logger" doc:id="9f8ead46-4c22-40a1-823a-92a450b1d5dc" message="End up here"/>
+		<logger level="INFO" doc:name="Logger" doc:id="8b73e352-e226-4448-935b-6218327ef26d" message="New logger 2"/>
 	</flow>
 	<sub-flow name="flow-creationSub_Flow" doc:id="494e7375-0573-43c2-8033-bd71499219ac" >
 		<logger level="INFO" doc:name="Logger" doc:id="b6fa252c-c865-4b97-9da3-78d6ae05deea" message="I am Chota Brother"/>
