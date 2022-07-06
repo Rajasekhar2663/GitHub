@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="ebc99a8f-e32d-4d86-9732-0ce1b7df609a" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="flow-creationFlow" doc:id="87ca973a-ecb0-469b-a947-ccf400d5ee53" >
+		<http:listener doc:name="Listener" doc:id="9f31df5c-52b8-4752-95c9-02b7d31427bb" config-ref="HTTP_Listener_config" path="flow"/>
+		<logger level="INFO" doc:name="Logger" doc:id="1acbabf5-6241-48b7-b398-5daf53c02ed1" message="Start with me"/>
+		<flow-ref doc:name="Flow Reference" doc:id="36ed3844-506c-4eac-a45f-31fbb8288f29" name="flow-creationSub_Flow"/>
+		<logger level="INFO" doc:name="Logger" doc:id="6c65458d-3949-4a22-8014-c7bfa91cb5ad" message="Hi nice to create here" />
+		<logger level="INFO" doc:name="Logger" doc:id="9f8ead46-4c22-40a1-823a-92a450b1d5dc" message="End up here"/>
+	</flow>
+	<sub-flow name="flow-creationSub_Flow" doc:id="494e7375-0573-43c2-8033-bd71499219ac" >
+		<logger level="INFO" doc:name="Logger" doc:id="b6fa252c-c865-4b97-9da3-78d6ae05deea" message="I am Chota Brother"/>
+		<flow-ref doc:name="Flow Reference" doc:id="14a86980-409d-42fa-b6ff-a221f012bd7a" name="flow-creationFlow1"/>
+	</sub-flow>
+	<flow name="flow-creationFlow1" doc:id="befeacda-3ec5-4305-88f0-169b8ae7bd04" >
+		<logger level="INFO" doc:name="Logger" doc:id="db01d864-32aa-4e09-b911-117b6723be29" message="I am Private Bro"/>
+	</flow>
+</mule>
