@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:email="http://www.mulesoft.org/schema/mule/email"
+	xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/email http://www.mulesoft.org/schema/mule/email/current/mule-email.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="10067653-519c-4737-9aa2-be46b48e85ba" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<file:config name="File_Config" doc:name="File Config" doc:id="04060943-39b6-4d38-aed5-276f4c142cd7" />
+	<file:config name="File_Config1" doc:name="File Config" doc:id="bdc6f62c-cd05-4fdb-b2a4-5e7104819456" />
+	<file:config name="File_Config2" doc:name="File Config" doc:id="42f645e5-dfe8-4ab2-bce1-a5add0a09099" />
+	<file:config name="File_Config3" doc:name="File Config" doc:id="18db364c-69ad-4691-9ecd-db32d5071928" />
+	<file:config name="File_Config4" doc:name="File Config" doc:id="e91db58b-f4a5-4ed8-89da-870c67dc9836" />
+	<file:config name="File_Config5" doc:name="File Config" doc:id="266b579b-1a69-4061-b05f-13cdcd2ee99f" />
+	<email:smtp-config name="Email_SMTP" doc:name="Email SMTP" doc:id="d9b490ec-8e8f-4254-9f75-8c43b132ffab" >
+		<email:smtp-connection host="smtp.gmail.com" port="587" user="rajasekhar730@gmail.com" password="9533655161" >
+			<email:properties >
+				<email:property key="mail.smtp.starttls.enable" value="true" />
+			</email:properties>
+		</email:smtp-connection>
+	</email:smtp-config>
+	<vm:config name="VM_Config" doc:name="VM Config" doc:id="267b14c0-f588-43da-82a4-6e408b01c605" >
+		<vm:queues >
+			<vm:queue queueName="Mine" />
+		</vm:queues>
+	</vm:config>
+	<flow name="task-fileconnectorsFlow" doc:id="46f22412-f039-4d02-b7ee-2187bccfc0d9" >
+		<http:listener doc:name="Listener" doc:id="ba5a3153-c87f-4cf5-94f3-76288209becd" config-ref="HTTP_Listener_config" path="FileConnectors"/>
+		<logger level="INFO" doc:name="Logger" doc:id="0dc35f91-16df-4a4a-9677-c70020c477a0" message="payload" />
+		<vm:publish doc:name="Publish" doc:id="41b32606-bca9-4179-9200-5b7d0a16079e" sendCorrelationId="AUTO" config-ref="VM_Config" queueName="Mine"/>
+	</flow>
+	<flow name="task-fileconnectorsFlow1" doc:id="3ba03f49-674a-45b7-b94e-8d8f2c07e900" >
+		<http:listener doc:name="Listener" doc:id="86a8140b-6ade-4275-87f2-18fcb2863c19" config-ref="HTTP_Listener_config" path="VM"/>
+		<vm:consume queueName="Mine" doc:name="Consume" doc:id="f865d704-3dce-421f-bb1b-2153eff85df4" config-ref="VM_Config" timeout="20"/>
+		<logger level="INFO" doc:name="Logger" doc:id="72ffd3d2-967d-4112-91ca-0eabefd6a8fb" message="#[payload]"/>
+	</flow>
+</mule>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="task-fileconnectors-suite.xml" />
+	<munit:test name="task-fileconnectorsFlow-test" doc:id="964766d8-21c9-41d1-9370-24256a300f65" >
+		<munit:behavior >
+			<munit:set-event doc:name="Set Input" doc:id="42c328c8-324b-4215-abb0-aa4b3653000f" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://taskfileconnectorsFlowtest\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://taskfileconnectorsFlowtest\set-event_attributes.dwl')]" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to task-fileconnectorsFlow" doc:id="8dd7b4e7-2d0d-452a-958e-a61107d3bec5" name="task-fileconnectorsFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="ccec33cf-ee10-45cc-a2de-d64d2383fb05" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import taskfileconnectorsFlowtest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
