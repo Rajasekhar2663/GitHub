@@ -20,5 +20,6 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 	</sub-flow>
 	<flow name="PrivateFlow" doc:id="cb2cce1d-d5d4-4456-8a5f-362e18bdb3df" >
 		<logger level="INFO" doc:name="Logger" doc:id="b082559e-f71e-48e4-b210-bad5b72f5771" message="Private Flow"/>
+		<logger level="INFO" doc:name="Logger" doc:id="b082559e-f71e-48e4-b210-bad5b72f5771" message="i am adding another logger"/>
 	</flow>
 </mule>
